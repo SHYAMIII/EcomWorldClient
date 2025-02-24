@@ -1,32 +1,70 @@
-import Link from 'next/link';
-import React from 'react';
+"use client";
+
+import Link from "next/link";
+import React from "react";
+import { motion } from "framer-motion";
 
 const Featured = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { staggerChildren: 0.2, delayChildren: 0.2 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { type: "spring", stiffness: 100, damping: 20 }
+    }
+  };
+
   return (
-    <div className="bg-[#040846] mx-auto flex justify-center">
-      <div className="bg-[#040846] w-full mx-auto max-w-[950px] px-4 py-8 md:py-12 md:px-6 lg:px-8 flex flex-col md:grid md:grid-cols-2 md:gap-8">
-        <div className="flex mx-auto flex-col mb-6 md:mb-0">
-          <h1 className="text-2xl md:text-3xl lg:text-4xl text-gray-200 font-bold">
+    <motion.div 
+      initial="hidden" 
+      animate="visible" 
+      variants={containerVariants}
+      className="bg-gradient-to-br from-blue-700 via-blue-600 to-blue-500 min-h-screen flex items-center justify-center px-4 py-8"
+    >
+      <div className="max-w-5xl w-full grid md:grid-cols-2 gap-8 items-center">
+        {/* Text Section */}
+        <motion.div variants={itemVariants} className="space-y-6">
+          <motion.h1 
+            variants={itemVariants}
+            className="text-4xl md:text-5xl font-bold text-white"
+          >
             Premium Software Hub:
-          </h1>
-          <p className="text-gray-400 text-sm md:text-base mt-3">
-            Welcome to Premium Software Hub, the ultimate destination for top-tier professional software solutions. We offer a curated selection of industry-leading paid applications designed to meet the diverse needs of professionals across various fields. Our platform ensures secure transactions, instant downloads, and dedicated customer support to enhance your purchasing experience. Discover the tools that can elevate your productivity and efficiency today.
-          </p>
-          <Link href="/AllProducts"
-           className="text-white text-sm md:text-base mt-3 bg-sky-900 w-fit px-3 py-2 rounded-lg">
+          </motion.h1>
+          <motion.p 
+            variants={itemVariants}
+            className="text-lg text-white/90 leading-relaxed"
+          >
+            Welcome to Premium Software Hub, your ultimate destination for top-tier professional software solutions. Enjoy secure transactions, instant downloads, and exceptional support—all designed to elevate your productivity.
+          </motion.p>
+          <motion.div variants={itemVariants}>
+            <Link 
+              href="/AllProducts"
+              className="inline-block px-8 py-3 bg-white text-blue-700 font-semibold rounded-full shadow-lg hover:bg-blue-50 transition-colors"
+            >
               Read More
-          
-          </Link>
-        </div>
-        <div className="flex mx-auto p-1 rounded-lg overflow-hidden justify-center md:w-[592px] md:justify-end">
-          <img
-            className=" h-auto max-w-full rounded-lg overflow-hidden  hover:scale-105 hover:shadow-2xl transition-all"
+            </Link>
+          </motion.div>
+        </motion.div>
+
+        {/* Image Section */}
+        <motion.div variants={itemVariants} className="flex justify-center items-center">
+          <motion.img 
+            whileHover={{ scale: 1.05 }}
             src="/software.jpg"
             alt="Software"
+            className="rounded-xl shadow-2xl max-w-full"
           />
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
