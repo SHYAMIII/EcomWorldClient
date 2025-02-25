@@ -13,3 +13,15 @@ export async function GET(req) {
     return NextResponse.json({ error: "Failed to fetch products" }, { status: 500 });
   }
 }
+
+export async function POST(req) {
+  try {
+    await connectDB();
+    const { ids } = await req.json(); // Parse ids from request body
+    const products = await Product.find({ _id: { $in: ids } }); // Fetch products by ids
+    return NextResponse.json(products, { status: 200 });
+  } catch (error) {
+    console.error("Error fetching products by ids:", error);
+    return NextResponse.json({ error: "Failed to fetch products" }, { status: 500 });
+  }
+}
