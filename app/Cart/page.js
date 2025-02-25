@@ -58,7 +58,7 @@ const Cart = () => {
   const handleCheckout = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/checkout`, {
+      const response = await fetch('/api/checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
