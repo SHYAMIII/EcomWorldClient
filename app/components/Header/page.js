@@ -7,17 +7,17 @@ import { CartContext } from "../CartContext";
 import { motion, AnimatePresence } from "framer-motion";
 
 const StyledHeader = styled.header`
-  padding: 0rem 2rem;
+  padding: 0 2rem;
   background: linear-gradient(135deg, #090673 0%, #1a1a8a 100%);
   backdrop-filter: blur(10px);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: sticky; /* Fixed to stay on top */
-  left: 0;
+  position: sticky;
   top: 0;
+  left: 0;
   width: 100%;
-  z-index: 3000; /* High z-index for header */
+  z-index: 3000;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
@@ -49,7 +49,7 @@ const Nav = styled.nav`
     padding: 2rem;
     justify-content: flex-start;
     backdrop-filter: blur(15px);
-    z-index: 3500; /* Above header content */
+    z-index: 3500;
   }
 `;
 
@@ -95,7 +95,7 @@ const Hamburger = styled(motion.div)`
   display: none;
   flex-direction: column;
   cursor: pointer;
-  z-index: 3100; /* Above nav on mobile */
+  z-index: 3100;
 
   span {
     height: 3px;
@@ -128,7 +128,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+  const toggleMenu = () => setIsOpen((prev) => !prev);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -159,34 +159,53 @@ const Header = () => {
             transition={{ duration: 0.3 }}
           >
             <Link href="/" legacyBehavior>
-  <NavLink whileHover={{ scale: 1.05 }} className="cursor-pointer" onClick={() => setIsOpen(false)}>
-    HOME
-  </NavLink>
-</Link>
+              <NavLink
+                whileHover={{ scale: 1.05 }}
+                className="cursor-pointer"
+                onClick={() => setIsOpen(false)}
+              >
+                HOME
+              </NavLink>
+            </Link>
 
-<Link href="/AllProducts" legacyBehavior>
-  <NavLink whileHover={{ scale: 1.05 }} className="cursor-pointer" onClick={() => setIsOpen(false)}>
-    PRODUCTS
-  </NavLink>
-</Link>
+            <Link href="/AllProducts" legacyBehavior>
+              <NavLink
+                whileHover={{ scale: 1.05 }}
+                className="cursor-pointer"
+                onClick={() => setIsOpen(false)}
+              >
+                PRODUCTS
+              </NavLink>
+            </Link>
 
-<Link href="/About" legacyBehavior>
-  <NavLink whileHover={{ scale: 1.05 }} className="cursor-pointer" onClick={() => setIsOpen(false)}>
-    ABOUT
-  </NavLink>
-</Link>
+            <Link href="/About" legacyBehavior>
+              <NavLink
+                whileHover={{ scale: 1.05 }}
+                className="cursor-pointer"
+                onClick={() => setIsOpen(false)}
+              >
+                ABOUT
+              </NavLink>
+            </Link>
 
-<Link href="/Cart" legacyBehavior>
-  <NavLink whileHover={{ scale: 1.05 }} className="cursor-pointer" onClick={() => setIsOpen(false)}>
-    CART
-    {cartProducts?.length > 0 && (
-      <CartBadge initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring" }}>
-        {cartProducts.length}
-      </CartBadge>
-    )}
-  </NavLink>
-</Link>
-
+            <Link href="/Cart" legacyBehavior>
+              <NavLink
+                whileHover={{ scale: 1.05 }}
+                className="cursor-pointer"
+                onClick={() => setIsOpen(false)}
+              >
+                CART
+                {cartProducts?.length > 0 && (
+                  <CartBadge
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring" }}
+                  >
+                    {cartProducts.length}
+                  </CartBadge>
+                )}
+              </NavLink>
+            </Link>
           </Nav>
         )}
       </AnimatePresence>

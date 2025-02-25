@@ -6,65 +6,70 @@ import { motion } from "framer-motion";
 
 const Featured = () => {
   const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.2 }
-    }
+      scale: 1,
+      transition: { staggerChildren: 0.3, delayChildren: 0.2 },
+    },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { type: "spring", stiffness: 100, damping: 20 }
-    }
+      transition: { type: "spring", stiffness: 80, damping: 20 },
+    },
   };
 
   return (
-    <motion.div 
-      initial="hidden" 
-      animate="visible" 
+    <motion.section
+      initial="hidden"
+      animate="visible"
       variants={containerVariants}
-      className="bg-gradient-to-br from-blue-700 via-blue-600 to-blue-500 min-h-screen flex items-center justify-center px-4 py-8"
+      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 p-8"
     >
-      <div className="max-w-5xl w-full grid md:grid-cols-2 gap-8 items-center">
-        {/* Text Section */}
-        <motion.div variants={itemVariants} className="space-y-6">
-          <motion.h1 
-            variants={itemVariants}
-            className="text-4xl md:text-5xl font-bold text-white"
-          >
-            Premium Software Hub:
-          </motion.h1>
-          <motion.p 
-            variants={itemVariants}
-            className="text-lg text-white/90 leading-relaxed"
-          >
-            Welcome to Premium Software Hub, your ultimate destination for top-tier professional software solutions. Enjoy secure transactions, instant downloads, and exceptional support—all designed to elevate your productivity.
-          </motion.p>
-          <motion.div variants={itemVariants}>
-            <Link 
-              href="/AllProducts"
-              className="inline-block px-8 py-3 bg-white text-blue-700 font-semibold rounded-full shadow-lg hover:bg-blue-50 transition-colors"
-            >
-              Read More
-            </Link>
-          </motion.div>
-        </motion.div>
-
+      <div className="bg-white/80 backdrop-blur-lg shadow-2xl rounded-2xl overflow-hidden flex flex-col md:flex-row max-w-5xl w-full">
         {/* Image Section */}
-        <motion.div variants={itemVariants} className="flex justify-center items-center">
-          <motion.img 
+        <motion.div variants={itemVariants} className="md:w-1/2">
+          <motion.img
             whileHover={{ scale: 1.05 }}
             src="/software.jpg"
             alt="Software"
-            className="rounded-xl shadow-2xl max-w-full"
+            className="w-full h-full object-cover"
           />
         </motion.div>
+        {/* Content Section */}
+        <motion.div
+          variants={itemVariants}
+          className="p-10 flex flex-col justify-center md:w-1/2"
+        >
+          <motion.h2
+            variants={itemVariants}
+            className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-blue-400 mb-6"
+          >
+            Premium Software Hub
+          </motion.h2>
+          <motion.p
+            variants={itemVariants}
+            className="text-lg text-blue-900 mb-8 leading-relaxed"
+          >
+            Discover top-tier professional software solutions with a focus on
+            innovation and quality. Enjoy secure transactions, instant downloads,
+            and exceptional support to boost your productivity.
+          </motion.p>
+          <motion.div variants={itemVariants}>
+            <Link
+              href="/AllProducts"
+              className="inline-block px-8 py-3 bg-blue-800 text-white font-semibold rounded-full shadow-lg hover:bg-blue-900 transition-all"
+            >
+              Explore Now
+            </Link>
+          </motion.div>
+        </motion.div>
       </div>
-    </motion.div>
+    </motion.section>
   );
 };
 

@@ -4,7 +4,6 @@ import Header from '../components/Header/page';
 import { CartContext } from '../components/CartContext';
 import Footer from '../components/Footer/page';
 import { TotalContext } from '../components/TotalContext';
-import Link from 'next/link';
 import { QRCodeSVG } from 'qrcode.react';
 import { useRouter } from 'next/navigation';
 
@@ -59,7 +58,7 @@ const Cart = () => {
   const handleCheckout = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/checkout', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/checkout`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
