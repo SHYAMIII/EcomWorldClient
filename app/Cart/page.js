@@ -17,7 +17,7 @@ const Cart = () => {
   const [address, setaddress] = useState('');
   const [postel, setpostel] = useState('');
   const { total, setTotal } = useContext(TotalContext);
-  const upiId = '7878260840@ybl';
+  const upiId = '8107061392@ybl';
   const [utr, setutr] = useState('');
   const upiUrl = `upi://pay?pa=${upiId}&pn=shyam ghosh`;
   const router = useRouter();
